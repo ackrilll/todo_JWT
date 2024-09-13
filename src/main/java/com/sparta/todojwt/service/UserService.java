@@ -42,4 +42,10 @@ public class UserService {
         User user = userRepository.findById(userId).orElseThrow(()->new NullPointerException("유저 못찾음"));
         return new UserDetailResponseDto(user.getId(), user.getName(),user.getEmail());
     }
+
+    @Transactional
+    public void deleteUser(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(()->new NullPointerException("유저 못찾음"));
+        userRepository.delete(user);
+    }
 }
