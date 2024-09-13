@@ -1,6 +1,7 @@
 package com.sparta.todojwt.service;
 
 import com.sparta.todojwt.dto.AuthUser;
+import com.sparta.todojwt.dto.CommentResponseDto;
 import com.sparta.todojwt.dto.CommentSaveRequestDto;
 import com.sparta.todojwt.dto.CommentSaveResponseDto;
 import com.sparta.todojwt.entity.Comment;
@@ -34,5 +35,10 @@ public class CommentService {
                 savedComment.getUser().getName(),
                 savedComment.getContent()
         );
+    }
+
+    public CommentResponseDto getComment(Long commentId) {
+        Comment comment = commentRepository.findById(commentId).orElseThrow(()->new NullPointerException("댓글 못찾음"));
+        return new CommentResponseDto(comment.getId(),comment.getUser().getName(),comment.getContent());
     }
 }
