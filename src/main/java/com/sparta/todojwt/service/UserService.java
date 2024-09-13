@@ -1,6 +1,7 @@
 package com.sparta.todojwt.service;
 
 import com.sparta.todojwt.config.JwtUtil;
+import com.sparta.todojwt.dto.UserDetailResponseDto;
 import com.sparta.todojwt.dto.UserSimpleResponseDto;
 import com.sparta.todojwt.entity.User;
 import com.sparta.todojwt.repository.UserRepository;
@@ -35,5 +36,10 @@ public class UserService {
             userDto.add(userSimpleResponseDto);
         }
         return userDto;
+    }
+
+    public UserDetailResponseDto getUser(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(()->new NullPointerException("유저 못찾음"));
+        return new UserDetailResponseDto(user.getId(), user.getName(),user.getEmail());
     }
 }
