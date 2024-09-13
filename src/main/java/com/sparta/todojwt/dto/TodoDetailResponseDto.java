@@ -1,8 +1,11 @@
 package com.sparta.todojwt.dto;
 
+import com.sparta.todojwt.entity.Comment;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 public class TodoDetailResponseDto {
@@ -12,13 +15,26 @@ public class TodoDetailResponseDto {
     private final String creator;
     private final LocalDateTime createAt;
     private final LocalDateTime modifiedAt;
+    private final List<CommentResponseDto> comments;
     public TodoDetailResponseDto(Long id, String title, String todo,
-                                 String creator, LocalDateTime createAt, LocalDateTime modifiedAt) {
+                                 String creator, LocalDateTime createAt, LocalDateTime modifiedAt,
+                                 List<Comment> comments)
+    {
+        List<CommentResponseDto> commentResponseDtoList = new ArrayList<>();
+        for (Comment comment : comments){
+            CommentResponseDto commentResponseDto = new CommentResponseDto(
+                    comment.getId(),
+                    comment.getUser().getName(),
+                    comment.getContent()
+            );
+            commentResponseDtoList.add(commentResponseDto);
+        }
         this.id = id;
         this.title = title;
         this.todo = todo;
         this.creator = creator;
         this.createAt = createAt;
         this.modifiedAt = modifiedAt;
+        this.comments = commentResponseDtoList;
     }
 }

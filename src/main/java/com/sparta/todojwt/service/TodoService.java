@@ -40,7 +40,8 @@ public class TodoService {
                 todo.getTodo(),
                 todo.getUser().getName(),
                 todo.getCreatedAt(),
-                todo.getModifiedAt()
+                todo.getModifiedAt(),
+                todo.getComments()
         );
 
     }
