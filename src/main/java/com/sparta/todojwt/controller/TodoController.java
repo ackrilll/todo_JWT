@@ -37,4 +37,9 @@ public class TodoController {
         return ResponseEntity.ok(todoService.getTodos(page,size));
     }
 
+    @DeleteMapping("/todos/{todoId}")
+    public void deleteTodo(@PathVariable Long todoId){
+        todoService.deleteTodo(todoId);
+    }
+
 }

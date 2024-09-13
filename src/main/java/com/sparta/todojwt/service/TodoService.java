@@ -76,4 +76,10 @@ public class TodoService {
                 todo.getCreatorName()
         ));
     }
+
+    @Transactional
+    public void deleteTodo(Long todoId) {
+        Todo todo = todoRepository.findById(todoId).orElseThrow(()->new NullPointerException("일정 못찾음"));
+        todoRepository.delete(todo);
+    }
 }
