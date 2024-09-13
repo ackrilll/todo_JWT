@@ -1,11 +1,9 @@
 package com.sparta.todojwt.controller;
 
-import com.sparta.todojwt.dto.AuthUser;
-import com.sparta.todojwt.dto.CommentResponseDto;
-import com.sparta.todojwt.dto.CommentSaveRequestDto;
-import com.sparta.todojwt.dto.CommentSaveResponseDto;
+import com.sparta.todojwt.dto.*;
 import com.sparta.todojwt.service.CommentService;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,6 +31,12 @@ public class CommentController {
     @GetMapping("/todos/comments")
     public ResponseEntity<List<CommentResponseDto>> getComments(){
         return ResponseEntity.ok(commentService.getComments());
+    }
+
+    @PutMapping("/todos/comments/{commentId}")
+    public ResponseEntity<CommentResponseDto> updateComment(@PathVariable Long commentId,
+                                                            @RequestBody CommentUpdateRequestDto commentUpdateRequestDto){
+        return ResponseEntity.ok(commentService.updateComment(commentId, commentUpdateRequestDto));
     }
 
 }
