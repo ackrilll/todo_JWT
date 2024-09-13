@@ -12,13 +12,15 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Table(name = "users")
-public class User {
+public class User extends Timestamped{
     @Id @GeneratedValue
     private Long id;
+    private String name;
     private String email;
     private String password;
 
-    public User(String email, String password) {
+    public User(String name, String email, String password) {
+        this.name = name;
         this.email = email;
         this.password = password;
     }
