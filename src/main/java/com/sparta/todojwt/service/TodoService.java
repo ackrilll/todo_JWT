@@ -1,9 +1,6 @@
 package com.sparta.todojwt.service;
 
-import com.sparta.todojwt.dto.AuthUser;
-import com.sparta.todojwt.dto.TodoDetailResponseDto;
-import com.sparta.todojwt.dto.TodoSaveRequestDto;
-import com.sparta.todojwt.dto.TodoSaveResponseDto;
+import com.sparta.todojwt.dto.*;
 import com.sparta.todojwt.entity.Todo;
 import com.sparta.todojwt.repository.TodoRepository;
 import com.sparta.todojwt.repository.UserRepository;
@@ -46,5 +43,19 @@ public class TodoService {
                 todo.getModifiedAt()
         );
 
+    }
+
+    @Transactional
+    public TodoUpdateResponseDto updateTodo(Long todoId, TodoUpdateRequestDto todoUpdateRequestDto) {
+        Todo todo = todoRepository.findById(todoId).orElseThrow(()->new NullPointerException("일정 못찾음"));
+        todo.update(todoUpdateRequestDto.getTitle(), todoUpdateRequestDto.getTodo());
+        return new TodoUpdateResponseDto(
+                todo.getId(),
+                todo.getTitle(),
+                todo.getTodo(),
+                todo.getUser().getName(),
+                todo.getCreatedAt(),
+                todo.getModifiedAt()
+        );
     }
 }

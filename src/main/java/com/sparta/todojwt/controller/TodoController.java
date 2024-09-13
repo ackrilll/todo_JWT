@@ -1,9 +1,6 @@
 package com.sparta.todojwt.controller;
 
-import com.sparta.todojwt.dto.AuthUser;
-import com.sparta.todojwt.dto.TodoDetailResponseDto;
-import com.sparta.todojwt.dto.TodoSaveRequestDto;
-import com.sparta.todojwt.dto.TodoSaveResponseDto;
+import com.sparta.todojwt.dto.*;
 import com.sparta.todojwt.service.TodoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +20,12 @@ public class TodoController {
     @GetMapping("/todos/{todoId}")
     public ResponseEntity<TodoDetailResponseDto> getTodo(@PathVariable Long todoId){
         return ResponseEntity.ok(todoService.getTodo(todoId));
+    }
+
+    @PutMapping("todos/{todoId}")
+    public ResponseEntity<TodoUpdateResponseDto> updateTodo(@PathVariable Long todoId,
+                                                            @RequestBody TodoUpdateRequestDto todoUpdateRequestDto){
+        return ResponseEntity.ok(todoService.updateTodo(todoId, todoUpdateRequestDto));
     }
 
 }

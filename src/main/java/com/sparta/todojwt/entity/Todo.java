@@ -23,4 +23,8 @@ public class Todo extends Timestamped{
         this.todo = todo;
     }
 
+    public void update(String title, String todo) {
+        this.title = title;
+        this.todo = todo;
+    }
 }
