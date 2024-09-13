@@ -2,6 +2,7 @@ package com.sparta.todojwt.service;
 
 import com.sparta.todojwt.dto.*;
 import com.sparta.todojwt.entity.Todo;
+import com.sparta.todojwt.entity.User;
 import com.sparta.todojwt.repository.TodoRepository;
 import com.sparta.todojwt.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +22,9 @@ public class TodoService {
 
     @Transactional
     public TodoSaveResponseDto saveTodo(AuthUser authUser, TodoSaveRequestDto todoSaveRequestDto) {
+        User createUser = userRepository.findById(authUser.getId()).orElseThrow(()-> new NullPointerException("유저 못찾음"));
         Todo newTodo = new Todo(
-                userRepository.findById(authUser.getId()).orElseThrow(()-> new NullPointerException("유저 못찾음")).getName(),
+                createUser.getId(),
                 todoSaveRequestDto.getTitle(),
                 todoSaveRequestDto.getTodo()
         );
@@ -31,7 +33,7 @@ public class TodoService {
                 savedTodo.getId(),
                 savedTodo.getTitle(),
                 savedTodo.getTodo(),
-                savedTodo.getCreatorName(),
+                savedTodo.getCreatorId(),
                 savedTodo.getCreatedAt(),
                 savedTodo.getModifiedAt());
     }
@@ -42,7 +44,7 @@ public class TodoService {
                 todo.getId(),
                 todo.getTitle(),
                 todo.getTodo(),
-                todo.getCreatorName(),
+                todo.getCreatorId(),
                 todo.getCreatedAt(),
                 todo.getModifiedAt(),
                 todo.getComments()
@@ -58,7 +60,7 @@ public class TodoService {
                 todo.getId(),
                 todo.getTitle(),
                 todo.getTodo(),
-                todo.getCreatorName(),
+                todo.getCreatorId(),
                 todo.getCreatedAt(),
                 todo.getModifiedAt()
         );
@@ -73,7 +75,7 @@ public class TodoService {
                 todo.getComments().size(),
                 todo.getCreatedAt(),
                 todo.getModifiedAt(),
-                todo.getCreatorName()
+                todo.getCreatorId()
         ));
     }
 

@@ -12,15 +12,15 @@ public class TodoSimpleResponseDto {
     private final int commentNum;
     private final LocalDateTime createdAt;
     private final LocalDateTime modifiedAt;
-    private final String creatorName;
+    private final Long creatorId;
 
     public TodoSimpleResponseDto(String todoTitle, String todoContent, int commentNum,
-                                 LocalDateTime createdAt, LocalDateTime modifiedAt, String creatorName) {
+                                 LocalDateTime createdAt, LocalDateTime modifiedAt, Long creatorId) {
         this.todoTitle = todoTitle;
         this.todoContent = todoContent;
         this.commentNum = commentNum;
         this.createdAt = createdAt;
         this.modifiedAt = modifiedAt;
-        this.creatorName = creatorName;
+        this.creatorId = creatorId;
     }
 }

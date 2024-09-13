@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,15 +14,15 @@ public class Todo extends Timestamped{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String creatorName;
+    private Long creatorId;
     private String title;
     private String todo;
 
     @OneToMany(mappedBy = "todo", cascade = CascadeType.REMOVE)
     private List<Comment> comments;
 
-    public Todo(String creatorName, String title, String todo){
-        this.creatorName = creatorName;
+    public Todo(Long creatorId, String title, String todo){
+        this.creatorId = creatorId;
         this.title = title;
         this.todo = todo;
     }
@@ -30,4 +31,6 @@ public class Todo extends Timestamped{
         this.title = title;
         this.todo = todo;
     }
+
+
 }

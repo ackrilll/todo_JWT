@@ -12,12 +12,12 @@ public class TodoDetailResponseDto {
     private final Long id;
     private final String title;
     private final String todo;
-    private final String creator;
+    private final Long creatorId;
     private final LocalDateTime createAt;
     private final LocalDateTime modifiedAt;
     private final List<CommentResponseDto> comments;
     public TodoDetailResponseDto(Long id, String title, String todo,
-                                 String creator, LocalDateTime createAt, LocalDateTime modifiedAt,
+                                 Long creatorId, LocalDateTime createAt, LocalDateTime modifiedAt,
                                  List<Comment> comments)
     {
         List<CommentResponseDto> commentResponseDtoList = new ArrayList<>();
@@ -32,7 +32,7 @@ public class TodoDetailResponseDto {
         this.id = id;
         this.title = title;
         this.todo = todo;
-        this.creator = creator;
+        this.creatorId = creatorId;
         this.createAt = createAt;
         this.modifiedAt = modifiedAt;
         this.comments = commentResponseDtoList;
