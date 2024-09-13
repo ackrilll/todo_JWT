@@ -3,6 +3,7 @@ package com.sparta.todojwt.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.apache.catalina.Manager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,9 @@ public class Todo extends Timestamped{
 
     @OneToMany(mappedBy = "todo", cascade = CascadeType.REMOVE)
     private List<Comment> comments;
+
+
+
 
     public Todo(Long creatorId, String title, String todo){
         this.creatorId = creatorId;
