@@ -3,6 +3,7 @@ package com.sparta.todojwt.controller;
 import com.sparta.todojwt.dto.*;
 import com.sparta.todojwt.service.TodoService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +27,14 @@ public class TodoController {
     public ResponseEntity<TodoUpdateResponseDto> updateTodo(@PathVariable Long todoId,
                                                             @RequestBody TodoUpdateRequestDto todoUpdateRequestDto){
         return ResponseEntity.ok(todoService.updateTodo(todoId, todoUpdateRequestDto));
+    }
+
+    @GetMapping("/todos")
+    public ResponseEntity<Page<TodoSimpleResponseDto>> getTodos(
+            @RequestParam (defaultValue = "1", required = false)int page,
+            @RequestParam (defaultValue = "10", required = false)int size
+    ){
+        return ResponseEntity.ok(todoService.getTodos(page,size));
     }
 
 }

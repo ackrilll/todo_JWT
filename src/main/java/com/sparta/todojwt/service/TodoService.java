@@ -5,6 +5,10 @@ import com.sparta.todojwt.entity.Todo;
 import com.sparta.todojwt.repository.TodoRepository;
 import com.sparta.todojwt.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -58,5 +62,18 @@ public class TodoService {
                 todo.getCreatedAt(),
                 todo.getModifiedAt()
         );
+    }
+
+    public Page<TodoSimpleResponseDto> getTodos(int page, int size) {
+        Pageable pageable = PageRequest.of(page-1, size);
+        Page<Todo> todos = todoRepository.findAllByOrderByModifiedAtDesc(pageable);
+        return todos.map(todo -> new TodoSimpleResponseDto(
+                todo.getTitle(),
+                todo.getTodo(),
+                todo.getComments().size(),
+                todo.getCreatedAt(),
+                todo.getModifiedAt(),
+                todo.getCreatorName()
+        ));
     }
 }
