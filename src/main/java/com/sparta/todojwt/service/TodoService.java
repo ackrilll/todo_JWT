@@ -18,7 +18,7 @@ public class TodoService {
     @Transactional
     public TodoSaveResponseDto saveTodo(AuthUser authUser, TodoSaveRequestDto todoSaveRequestDto) {
         Todo newTodo = new Todo(
-                userRepository.findById(authUser.getId()).orElseThrow(()-> new NullPointerException("유저 못찾음")),
+                userRepository.findById(authUser.getId()).orElseThrow(()-> new NullPointerException("유저 못찾음")).getName(),
                 todoSaveRequestDto.getTitle(),
                 todoSaveRequestDto.getTodo()
         );
@@ -27,7 +27,7 @@ public class TodoService {
                 savedTodo.getId(),
                 savedTodo.getTitle(),
                 savedTodo.getTodo(),
-                savedTodo.getUser().getName(),
+                savedTodo.getCreatorName(),
                 savedTodo.getCreatedAt(),
                 savedTodo.getModifiedAt());
     }
@@ -38,7 +38,7 @@ public class TodoService {
                 todo.getId(),
                 todo.getTitle(),
                 todo.getTodo(),
-                todo.getUser().getName(),
+                todo.getCreatorName(),
                 todo.getCreatedAt(),
                 todo.getModifiedAt(),
                 todo.getComments()
@@ -54,7 +54,7 @@ public class TodoService {
                 todo.getId(),
                 todo.getTitle(),
                 todo.getTodo(),
-                todo.getUser().getName(),
+                todo.getCreatorName(),
                 todo.getCreatedAt(),
                 todo.getModifiedAt()
         );

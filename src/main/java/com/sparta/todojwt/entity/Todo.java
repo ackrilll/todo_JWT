@@ -13,17 +13,15 @@ public class Todo extends Timestamped{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    private String creatorName;
     private String title;
     private String todo;
 
     @OneToMany(mappedBy = "todo", cascade = CascadeType.REMOVE)
     private List<Comment> comments;
 
-    public Todo(User user, String title, String todo){
-        this.user = user;
+    public Todo(String creatorName, String title, String todo){
+        this.creatorName = creatorName;
         this.title = title;
         this.todo = todo;
     }
