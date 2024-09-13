@@ -58,4 +58,10 @@ public class CommentService {
         comment.update(commentUpdateRequestDto.getContent());
         return new CommentResponseDto(comment.getId(),comment.getUser().getName(),comment.getContent());
     }
+
+    @Transactional
+    public void deleteComment(Long commentId) {
+        Comment comment = commentRepository.findById(commentId).orElseThrow(()-> new NullPointerException("댓글 못찾음"));
+        commentRepository.delete(comment);
+    }
 }
